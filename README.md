@@ -8,7 +8,7 @@ by J. Austin et al. and [Argmax Flows and Multinomial Diffusion: Learning Catego
 by E. Hoogeboom et al.
 
 <p align="center">
-  <img src="forwar_rev.png"  alt="1" width = 640px height = 14px >
+  <img src="forwar_rev.png"  alt="1" width = 800px height = 250px >
 </p>
 
 
