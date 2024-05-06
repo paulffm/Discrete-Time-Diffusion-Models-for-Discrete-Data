@@ -6,7 +6,6 @@ def get_config():
     save_directory = "SavedModels/MNIST/"
 
     config = ml_collections.ConfigDict()
-    config.experiment_name = "mnist"
     config.save_location = save_directory
 
     config.init_model_path = None
@@ -100,7 +99,6 @@ def get_config():
     saving.checkpoint_freq = 10000
 
     config.sampler = sampler = ml_collections.ConfigDict()
-    sampler.name = "ElboTauL"  # TauLeaping or PCTauLeaping
     sampler.num_steps = 1000
     sampler.min_t = loss.min_time
     sampler.eps_ratio = 1e-9

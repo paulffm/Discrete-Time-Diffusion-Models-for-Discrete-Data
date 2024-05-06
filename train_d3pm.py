@@ -5,11 +5,6 @@ import matplotlib.pyplot as plt
 import ssl
 import os
 from lib.d3pm import make_diffusion
-# from config.maze_config.config_bert_maze import get_config
-# from config.maze_config.config_maskedUnet_maze import get_config
-# from config.maze_config.config_tauUnet_maze import get_config
-#from config.maze_config.config_hollow_maze import get_config
-
 from config.mnist_config.config_mnist_d3pm import get_config
 import lib.models.models as models
 import lib.models.model_utils as model_utils

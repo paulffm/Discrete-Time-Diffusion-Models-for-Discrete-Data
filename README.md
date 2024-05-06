@@ -1,6 +1,6 @@
 # Discrete-Time Diffusion Models for Discrete Data
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/paulffm/Dirichlet-Diffusion-Score-Model-Reimplementation/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/paulffm/Discrete-Time-Diffusion-Models-for-Discrete-Data/blob/main/LICENSE)
 
 Unofficial **PyTorch** reimplementations of the
 papers [Structured Denoising Diffusion Models in Discrete State-Spaces](https://arxiv.org/pdf/2107.03006)
@@ -8,54 +8,42 @@ by J. Austin et al. and [Argmax Flows and Multinomial Diffusion: Learning Catego
 by E. Hoogeboom et al.
 
 <p align="center">
-  <img src="forwar_rev.png"  alt="1" width = 800px height = 250px >
+  <img src="forwar_rev.png"  alt="1" width = 820px height = 250px >
 </p>
 
 
 ## Usage
 
-This implementation provides example notebooks for training and evaluation of DDSM models for Bin-MNIST and MNIST data. In these notebooks you can simply load our provided configs and start training or retraining your models with them as follows:
+This implementation provides an example script for training D3PM models to generate MNIST data or maze data. In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
 
 ```python
-import os
-from lib.models.networks import MNISTScoreNet
-import lib.utils.bookkeeping as bookkeeping
-from lib.config.config_bin_mnist import get_config
+def main():
 
-train_resume = False
-train_resume_path = 'path/to/saved/models'
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    save_location = os.path.join(script_dir, f"SavedModels/MNIST/")
+    save_location_png = os.path.join(save_location, "PNGs/")
+    # dataset_location = os.path.join(script_dir, 'lib/datasets')
+    dataset_location = os.path.join(script_dir, 'lib/datasets')
 
-if not train_resume:
-    config = get_config()
-    bookkeeping.save_config(config, config.saving.save_location)
+    train_resume = False
+    print(save_location)
+    if not train_resume:
+        cfg = get_config()
+        bookkeeping.save_config(cfg, save_location)
 
-else:
-    path = train_resume_path
-    date = "date"
-    config_name = "config_001.yaml"
-    config_path = os.path.join(path, date, config_name)
-    config = bookkeeping.load_config(config_path)
-
-model = MNISTScoreNet(ch=config.model.ch, ch_mult=config.model.ch_mult, attn=config.model.attn, num_res_blocks=config.model.num_res_blocks, dropout=0.1, time_dependent_weights=time_dependent_weights)
-print("Number of parameters: ", sum([p.numel() for p in model.parameters()]))
-optimizer = Adam(model.parameters(), lr=config.optimizer.lr, weight_decay=config.optimizer.weight_decay)
-n_iter = 0
-state = {"model": model, "optimizer": optimizer, "n_iter": 0}
-
-if train_resume:
-    checkpoint_path = config.saving.checkpoint_path
-    model_name = 'model_name.pt'
-    checkpoint_path = os.path.join(path, date, model_name)
-    state = bookkeeping.load_state(state, checkpoint_path, device)
-    config.training.n_iter = 100000
-    config.sampler.sampler_freq = 5000
-    config.saving.checkpoint_freq = 1000
-
+    else:
+        model_name = "model_name.pt"
+        date = "2024-05-10"
+        config_name = "config_001.yaml"
+        config_path = os.path.join(save_location, date, config_name)
+        cfg = bookkeeping.load_config(config_path)
 ```
-Further, I provided a notebook to presample noise and speed up the computation.
-
+In addition, you need to set a location in the config files where you want to save you trained models:
+```python
+save_directory = "SavedModels/MNIST/"
+```
 ## Note
-I additionally included the U-Net model from paper [Structured Denoising Diffusion Models in Discrete State-Spaces](https://arxiv.org/pdf/2107.03006.pdf) which could be more suitable to the MNIST dataset.
+Infos to the maze dataset and the corresponding sample quality metrics can be found here.
 
 ## Reference
 
