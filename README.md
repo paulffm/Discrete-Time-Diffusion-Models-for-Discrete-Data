@@ -49,13 +49,13 @@ Infos to the maze dataset and the corresponding sample quality metrics can be fo
 D3PM results on MNIST: FID: 1.88; Inception Score: 8.6
 
 <p align="center">
-  <img src="mnist_samples.png"  alt="1">
+  <img src="mnist_samples.png"  alt="1" width = 600px height = 600px>
 </p>
 
 D3PM results on maze dataset: Accuracy: 85%; Hellinger Distance: 0.0709
 
 <p align="center">
-  <img src="maze_samples.png"  alt="1">
+  <img src="maze_samples.png"  alt="1" width = 600px height = 600px>
 </p>
 
 ## Reference
