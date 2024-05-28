@@ -16,14 +16,12 @@ import lib.training.training as training
 import lib.training.training_utils as training_utils
 import lib.optimizers.optimizers as optimizers
 import lib.optimizers.optimizers_utils as optimizers_utils
-import time
 from torch.utils.data import DataLoader
 import numpy as np
 from ruamel.yaml.scalarfloat import ScalarFloat
-import time
 from lib.losses.losses import d3pm_loss
 
-# MLE: Iter: 300000 168214.7792992592
+
 
 
 def main():
@@ -31,7 +29,6 @@ def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
     save_location = os.path.join(script_dir, f"SavedModels/MNIST/")
     save_location_png = os.path.join(save_location, "PNGs/")
-    # dataset_location = os.path.join(script_dir, 'lib/datasets')
     dataset_location = os.path.join(script_dir, 'lib/datasets')
 
     train_resume = False
@@ -41,8 +38,8 @@ def main():
         bookkeeping.save_config(cfg, save_location)
 
     else:
-        model_name = "model_name.pt"
-        date = "2024-05-10"
+        model_name = "model_1.pt"
+        date = "2024-05-28"
         config_name = "config_001.yaml"
         config_path = os.path.join(save_location, date, config_name)
         cfg = bookkeeping.load_config(config_path)
@@ -59,10 +56,8 @@ def main():
         checkpoint_path = os.path.join(save_location, date, model_name)
         state = bookkeeping.load_state(state, checkpoint_path, device)
         cfg.training.n_iters = 300000
-        cfg.sampler.sample_freq = 500000000000
         cfg.saving.checkpoint_freq = 5000
-        cfg.sampler.num_steps = 1000
-        cfg.sampler.corrector_entry_time = ScalarFloat(0.0)
+
         # bookkeeping.save_config(cfg, save_location)
 
 
@@ -82,17 +77,14 @@ def main():
     print("State Iter:", state["n_iter"])
     print("--------------------------------")
     print("Name Dataset:", cfg.data.name)
-    print("Loss Name:", cfg.loss.name)
     print("--------------------------------")
     print("Model Name:", cfg.model.name)
     print("Number of Parameters: ", sum([p.numel() for p in model.parameters()]))
-    print("Sampler:", cfg.sampler.name)
 
     n_samples = 16
     training_loss = []
     exit_flag = False
     n = 1
-    start = time.time()
     num_timesteps = cfg.model.num_timesteps
     print("Num steps", num_timesteps)
     while True:
@@ -108,10 +100,10 @@ def main():
                 bookkeeping.save_state(state, save_location)
                 print("Model saved in Iteration:", state["n_iter"] + 1)
                 saving_train_path = os.path.join(
-                    save_location_png, f"loss_{cfg.loss.name}{state['n_iter']}.png"
+                    save_location_png, f"{state['n_iter']}.png"
                 )
                 saving_train_loss = os.path.join(
-                    save_location_png, f"loss_{cfg.loss.name}{state['n_iter']}.npy"
+                    save_location_png, f"{state['n_iter']}.npy"
                 )
                 plt.plot(training_loss)
                 np.save(saving_train_loss, training_loss)
@@ -130,7 +122,7 @@ def main():
             break
 
     saving_train_path = os.path.join(
-        save_location_png, f"loss_{cfg.loss.name}{state['n_iter']}.png"
+        save_location_png, f"{state['n_iter']}.png"
     )
     plt.plot(training_loss)
     plt.xlabel("Iterations")

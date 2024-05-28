@@ -5,7 +5,7 @@ import lib.models.model_utils as model_utils
 from torchtyping import TensorType
 import torch.autograd.profiler as profiler
 from torch.nn.parallel import DistributedDataParallel as DDP
-from lib.networks import hollow_networks, unet, ddsm_networks
+from lib.networks import unet, ddsm_networks
 
 
 class ImageX0PredBasePaul(nn.Module):
