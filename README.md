@@ -11,6 +11,35 @@ by E. Hoogeboom et al.
   <img src="forward_reverse_process.png"  alt="1" width = 820px height = 250px >
 </p>
 
+## Installation
+
+Follow these steps to clone the repository and install the dependencies:
+
+### 1. Clone the repository
+
+Clone the repository using the following command:
+
+```sh
+git clone https://github.com/paulffm/Discrete-Time-Diffusion-Models-for-Discrete-Data.git
+cd Discrete-Time-Diffusion-Models-for-Discrete-Data
+```
+
+### 2. Create a virtual environment
+
+Create a virtual environment to install dependencies in isolation:
+
+```sh
+python -m venv myvenv
+source myvenv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+### 3. Install dependencies
+
+Install the necessary dependencies using pip:
+
+```sh
+pip install -r requirements.txt
+```
 
 ## Usage
 
