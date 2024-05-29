@@ -30,7 +30,7 @@ Create a virtual environment to install dependencies in isolation:
 
 ```sh
 python -m venv myvenv
-source myvenv/bin/activate  # On Windows use `venv\Scripts\activate`
+source myvenv/bin/activate  # On Windows use `myvenv\Scripts\activate`
 ```
 
 ### 3. Install dependencies
