@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-This implementation provides an example script for training D3PM models to generate MNIST data or maze data. In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
+This implementation provides an example script **train_d3pm.py** for training D3PM models to generate MNIST data or maze data. In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
 
 ```python
 def main():
