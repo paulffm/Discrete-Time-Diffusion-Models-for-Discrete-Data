@@ -66,10 +66,59 @@ def main():
         config_path = os.path.join(save_location, date, config_name)
         cfg = bookkeeping.load_config(config_path)
 ```
-In addition, you need to set a location in the config files where you want to save you trained models:
-```python
-save_directory = "SavedModels/MNIST/"
-```
+
+The configuration files (`TAUnSDDM/config`) are provided to simplify the training and sampling process. A configuration file tailored for generating MNIST data with a U-Net includes the following parameters:
+
+| Parameter                 | Description                                          | Type   |
+|---------------------------|------------------------------------------------------|--------|
+| device                    | Device to be used for training                       | str    |
+| distributed               | Whether to use distributed training                  | bool   |
+| num_gpus                  | Number of GPUs to use                                | int    |
+| training.train_step_name  | Name of the training step                            | str    |
+| training.n_iters          | Number of training iterations                         | int    |
+| training.clip_grad        | Whether to clip gradients                            | bool   |
+| training.grad_norm        | Value to normalize gradients                          | int    |
+| training.warmup           | Number of warmup steps                               | int    |
+| data.name                 | Name of the dataset                                  | str    |
+| data.train                | Whether to use training data                         | bool   |
+| data.download             | Whether to download dataset                          | bool   |
+| data.S                    | Number of discrete states                            | int    |
+| data.batch_size           | Batch size                                           | int    |
+| data.shuffle              | Whether to shuffle data                              | bool   |
+| data.image_size           | Size of the input image                              | int    |
+| data.random_flips         | Whether to apply random flips to the data            | bool   |
+| data.use_augm             | Whether to use data augmentation                     | bool   |
+| model.name                | Name of the model                                    | str    |
+| model.padding             | Whether to use padding in the model                  | bool   |
+| model.ema_decay           | Exponential moving average decay rate                | float  |
+| model.ch                  | Number of channels in the model                      | int    |
+| model.num_res_blocks      | Number of residual blocks in the model               | int    |
+| model.ch_mult             | Multiplier for channel dimensions in the model       | list   |
+| model.input_channels      | Number of input channels                             | int    |
+| model.scale_count_to_put_attn | Scaling factor for attention resolution          | int    |
+| model.data_min_max        | Minimum and maximum data values                      | list   |
+| model.dropout             | Dropout rate in the model                            | float  |
+| model.skip_rescale        | Whether to rescale skipped connections               | bool   |
+| model.time_embed_dim      | Dimension of time embedding                          | int    |
+| model.time_scale_factor   | Scaling factor for time dimension                    | int    |
+| model.fix_logistic        | Whether to fix logistic outputs                      | bool   |
+| model.model_output        | Type of model output                                 | str    |
+| model.num_heads           | Number of attention heads                            | int    |
+| model.attn_resolutions    | Resolutions for attention mechanisms                 | list   |
+| model.concat_dim          | Dimension for concatenation in the model             | int    |
+| model.type                | Type of diffusion model                              | str    |
+| model.start               | Start value for noise schedule of diffusion model                      | float  |
+| model.stop                | Stop value for noise schedule of for diffusion model                       | float  |
+| model.num_timesteps       | Number of time steps for diffusion model             | int    |
+| model.model_prediction    | Type of model prediction                             | str    |
+| model.transition_mat_type | Type of transition matrix                           | str    |
+| model.loss_type           | Type of loss function                                | str    |
+| model.hybrid_coeff        | Coefficient for hybrid loss function                 | float  |
+| optimizer.name            | Name of the optimizer                                | str    |
+| optimizer.lr              | Learning rate of the optimizer                       | float  |
+| saving.sample_plot_path   | Path to save sample plots                            | str    |
+| saving.checkpoint_freq    | Frequency of saving model checkpoints                | int    |
+
 ## Note
 
 Infos to the maze dataset can be found [here](https://github.com/Turidus/Python-Maze/tree/master).
@@ -81,11 +130,11 @@ According to [PaperwithCode](https://paperswithcode.com/sota/image-generation-on
 | Rank | Model | FID |
 | ---- | ----- | --- |
 | 1    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{ll}}$ + Midpoint Tau-Leaping | 1.75 |
-| 2    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{CTEll}}$+ Midpoint Tau-Leaping | 2.40 |
 | 2    | [D3PM](https://arxiv.org/pdf/2107.03006) + \(L_{\text{DTEll}}\) | 1.88 |
-| 3    | [Sliced Iterative Normalizing Flows](https://arxiv.org/pdf/2007.00674v3) | 4.5 |
-| 4    | [Generative Latent Flow + perceptual loss](https://arxiv.org/pdf/1905.10485v2) | 5.8 |
-| 5    | [HypGan](https://arxiv.org/pdf/2102.05567v1) | 7.87 |
+| 3    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{CTEll}}$+ Midpoint Tau-Leaping | 2.40 |
+| 4    | [Sliced Iterative Normalizing Flows](https://arxiv.org/pdf/2007.00674v3) | 4.5 |
+| 5    | [Generative Latent Flow + perceptual loss](https://arxiv.org/pdf/1905.10485v2) | 5.8 |
+| 6    | [HypGan](https://arxiv.org/pdf/2102.05567v1) | 7.87 |
 
 In the above table:
 
