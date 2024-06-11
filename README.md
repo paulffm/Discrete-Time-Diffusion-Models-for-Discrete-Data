@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-This implementation provides an example script **train_d3pm.py** for training D3PM models to generate [MNIST](http://yann.lecun.com/exdb/mnist/) or [maze](https://github.com/Turidus/Python-Maze/tree/master). In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
+This implementation provides an example script **train_d3pm.py** for training D3PM models to generate [MNIST](http://yann.lecun.com/exdb/mnist/) or [maze](https://github.com/Turidus/Python-Maze/tree/master) data. In this script you can simply use my provided configs and start training or continue training your models. You just need to set the correct paths in the beginning of the script, i.e.:
 
 ```python
 def main():
@@ -61,7 +61,7 @@ def main():
 
     else:
         model_name = "model_name.pt"
-        date = "2024-05-10"
+        date = "2024-06-10"
         config_name = "config_001.yaml"
         config_path = os.path.join(save_location, date, config_name)
         cfg = bookkeeping.load_config(config_path)
@@ -119,10 +119,6 @@ The configuration files (`TAUnSDDM/config`) are provided to simplify the trainin
 | saving.sample_plot_path   | Path to save sample plots                            | str    |
 | saving.checkpoint_freq    | Frequency of saving model checkpoints                | int    |
 
-## Note
-
-Infos to the maze dataset can be found [here](https://github.com/Turidus/Python-Maze/tree/master).
-
 ## Results
 
 According to [PaperwithCode](https://paperswithcode.com/sota/image-generation-on-mnist), the [D3PM](https://arxiv.org/pdf/2107.03006) framework achieves state-of-the-art performance in terms of FID score on the MNIST dataset, surpassing previous state-of-the-art models. However, it lacks behind the [tauLDR](https://arxiv.org/pdf/2205.14987) framework, combined with negative log-likelihood loss and the Midpoint Tau-Leaping sampler from my [repository](https://github.com/paulffm/Continuous-Time-Diffusion-Models-for-Discrete-Data):
@@ -141,7 +137,8 @@ In the above table:
 - $L_{\text{ll}}$ represents the negative log-likelihood loss.
 - $L_{\text{CTEll}} = L_\text{cvb} + \lambda L_{\text{ll}}$ denotes a combination of the continuous-time ELBO and negative log-likelihood loss.
 - $L_{\text{CTEll}} = L_\text{vb} + \lambda L_{\text{ll}}$ denotes a combination of the discrete-time ELBO and negative log-likelihood loss.
-  In both cases, $\lambda = 0.001$.
+
+In both cases, $\lambda = 0.001$.
 
 Some generated MNIST and maze samples:
 
@@ -149,6 +146,10 @@ Some generated MNIST and maze samples:
   <img src="assets/mnist_samples.png" alt="Image 1" width="45%">
   <img src="assets/maze_samples.png" alt="Image 2" width="45%">
 </p>
+
+## Note
+
+Infos to the maze dataset can be found [here](https://github.com/Turidus/Python-Maze/tree/master).
 
 ## Reference
 
