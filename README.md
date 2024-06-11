@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/paulffm/Discrete-Time-Diffusion-Models-for-Discrete-Data/blob/main/LICENSE)
 
 Unofficial **PyTorch** reimplementations of the
-papers [Structured Denoising Diffusion Models in Discrete State-Spaces](https://arxiv.org/pdf/2107.03006)
+papers [Structured Denoising Diffusion Models in Discrete State-Spaces](https://arxiv.org/pdf/2107.03006) (D3PM)
 by J. Austin et al. and [Argmax Flows and Multinomial Diffusion: Learning Categorical Distributions](https://arxiv.org/abs/2102.05379)
 by E. Hoogeboom et al.
 
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-This implementation provides an example script **train_d3pm.py** for training D3PM models to generate MNIST data or maze data. In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
+This implementation provides an example script **train_d3pm.py** for training D3PM models to generate [MNIST](http://yann.lecun.com/exdb/mnist/) or [maze](https://github.com/Turidus/Python-Maze/tree/master). In this script you can simply use my provided configs and start training or retraining your models. You just need to set the correct paths in the beginning of the script, i.e.:
 
 ```python
 def main():
@@ -71,19 +71,33 @@ In addition, you need to set a location in the config files where you want to sa
 save_directory = "SavedModels/MNIST/"
 ```
 ## Note
-Infos to the maze dataset and the corresponding sample quality metrics can be found here.
+
+Infos to the maze dataset can be found [here](https://github.com/Turidus/Python-Maze/tree/master).
 
 ## Results
-D3PM results on MNIST: FID: 1.88; Inception Score: 8.6
+
+According to [PaperwithCode](https://paperswithcode.com/sota/image-generation-on-mnist), the [D3PM](https://arxiv.org/pdf/2107.03006) framework achieves state-of-the-art performance in terms of FID score on the MNIST dataset, surpassing previous state-of-the-art models. However, it lacks behind the [tauLDR](https://arxiv.org/pdf/2205.14987) framework, combined with negative log-likelihood loss and the Midpoint Tau-Leaping sampler from my [repository](https://github.com/paulffm/Continuous-Time-Diffusion-Models-for-Discrete-Data):
+
+| Rank | Model | FID |
+| ---- | ----- | --- |
+| 1    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{ll}}$ + Midpoint Tau-Leaping | 1.75 |
+| 2    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{CTEll}}$+ Midpoint Tau-Leaping | 2.40 |
+| 2    | D3PM + \(L_{\text{DTEll}}\) | 1.88 |
+| 3    | [Sliced Iterative Normalizing Flows](https://arxiv.org/pdf/2007.00674v3) | 4.5 |
+| 4    | [Generative Latent Flow + perceptual loss](https://arxiv.org/pdf/1905.10485v2) | 5.8 |
+| 5    | [HypGan](https://arxiv.org/pdf/2102.05567v1) | 7.87 |
+
+In the above table:
+- $L_{\text{ll}}$ represents the negative log-likelihood loss.
+- $L_{\text{CTEll}} = L_\text{cvb} + \lambda L_{\text{ll}}$ denotes a combination of the continuous-time ELBO and negative log-likelihood loss.
+- $L_{\text{CTEll}} = L_\text{vb} + \lambda L_{\text{ll}}$ denotes a combination of the discrete-time ELBO and negative log-likelihood loss.
+  In both cases, $\lambda = 0.001$.
+
+Some generated MNIST and maze samples:
 
 <p align="center">
-  <img src="mnist_samples.png"  alt="1" width = 600px height = 600px>
-</p>
-
-D3PM results on maze dataset: Accuracy: 85%; Hellinger Distance: 0.0709
-
-<p align="center">
-  <img src="maze_samples.png"  alt="1" width = 600px height = 600px>
+  <img src="assets/mnist_samples.png" alt="Image 1" width="45%">
+  <img src="assets/maze_samples.png" alt="Image 2" width="45%">
 </p>
 
 ## Reference
