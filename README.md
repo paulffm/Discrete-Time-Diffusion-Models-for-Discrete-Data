@@ -126,7 +126,7 @@ According to [PaperwithCode](https://paperswithcode.com/sota/image-generation-on
 | Rank | Model | FID |
 | ---- | ----- | --- |
 | 1    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{ll}}$ + Midpoint Tau-Leaping | 1.75 |
-| 2    | [D3PM](https://arxiv.org/pdf/2107.03006) + \(L_{\text{DTEll}}\) | 1.88 |
+| 2    | [D3PM](https://arxiv.org/pdf/2107.03006) + $L_{\text{DTEll}}$ | 1.88 |
 | 3    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{CTEll}}$+ Midpoint Tau-Leaping | 2.40 |
 | 4    | [Sliced Iterative Normalizing Flows](https://arxiv.org/pdf/2007.00674v3) | 4.5 |
 | 5    | [Generative Latent Flow + perceptual loss](https://arxiv.org/pdf/1905.10485v2) | 5.8 |
