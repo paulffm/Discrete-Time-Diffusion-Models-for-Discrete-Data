@@ -8,7 +8,7 @@ by J. Austin et al. and [Argmax Flows and Multinomial Diffusion: Learning Catego
 by E. Hoogeboom et al.
 
 <p align="center">
-  <img src="forward_reverse_process.png"  alt="1" width = 820px height = 250px >
+  <img src="assets/forward_reverse_process.png"  alt="1" width = 820px height = 250px >
 </p>
 
 ## Installation
@@ -82,12 +82,13 @@ According to [PaperwithCode](https://paperswithcode.com/sota/image-generation-on
 | ---- | ----- | --- |
 | 1    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{ll}}$ + Midpoint Tau-Leaping | 1.75 |
 | 2    | [tauLDR](https://arxiv.org/pdf/2205.14987) + $L_{\text{CTEll}}$+ Midpoint Tau-Leaping | 2.40 |
-| 2    | D3PM + \(L_{\text{DTEll}}\) | 1.88 |
+| 2    | [D3PM](https://arxiv.org/pdf/2107.03006) + \(L_{\text{DTEll}}\) | 1.88 |
 | 3    | [Sliced Iterative Normalizing Flows](https://arxiv.org/pdf/2007.00674v3) | 4.5 |
 | 4    | [Generative Latent Flow + perceptual loss](https://arxiv.org/pdf/1905.10485v2) | 5.8 |
 | 5    | [HypGan](https://arxiv.org/pdf/2102.05567v1) | 7.87 |
 
 In the above table:
+
 - $L_{\text{ll}}$ represents the negative log-likelihood loss.
 - $L_{\text{CTEll}} = L_\text{cvb} + \lambda L_{\text{ll}}$ denotes a combination of the continuous-time ELBO and negative log-likelihood loss.
 - $L_{\text{CTEll}} = L_\text{vb} + \lambda L_{\text{ll}}$ denotes a combination of the discrete-time ELBO and negative log-likelihood loss.
